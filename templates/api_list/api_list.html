@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h1>Список api</h1>
+        </div>
+    </div>
+    <div class="api-list ml-4">
+        <ul class="list-unstyled">
+            {% for api in api_list %}
+                <li>
+                    <a class="nav-link d-inline" href="/{{ api.url }}">{{ api.url }}</a> - {{ api.description }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
