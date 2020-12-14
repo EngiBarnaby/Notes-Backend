@@ -7,6 +7,7 @@ urlpatterns = [
     path("", include("note.urls")),
     path("api/", include("api_list.urls", namespace="api")),
     path("api/notes/", include("note.api.urls")),
+    path("api/todos/", include("todo.api.urls")),
     path('admin/', admin.site.urls),
     path("account/", include("account.urls")),
     path('tinymce/', include('tinymce.urls')),

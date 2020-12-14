@@ -39,7 +39,6 @@ class NoteList(APIView):
         custom_user = CustomUser.objects.get(user=request.user)
         request.data["user"] = custom_user.id
         serializer = NoteSerializer(data=request.data)
-        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
