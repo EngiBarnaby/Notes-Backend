@@ -10,8 +10,10 @@ from account.models import CustomUser
 class TodoList(APIView):
 
     def get(self, request):
+        date = request.GET["date"]
+        day, month, year = date.split("_")[0], date.split("_")[1], date.split("_")[2]
         user = CustomUser.objects.get(user=request.user)
-        todos = Todo.objects.filter(user=user)
+        todos = Todo.objects.filter(user=user, created__year=year, created__month=month, created__day=day)
         serializer = TodoSerializer(todos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

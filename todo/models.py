@@ -7,7 +7,7 @@ class Todo(models.Model):
     title = models.CharField(max_length=350)
     subtext = models.TextField(blank=True, null=True)
     completed = models.BooleanField(default=False)
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["-created"]
