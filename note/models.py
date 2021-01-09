@@ -8,9 +8,10 @@ from account.models import CustomUser
 class NoteCategory(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="categories")
     title = models.CharField(max_length=150)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["-created"]
 
     def __str__(self):
         return self.title

@@ -23,6 +23,6 @@ class NoteSerializer(serializers.ModelSerializer):
         user = validated_data.pop('user')
         category = validated_data.pop("category")
         custom_user = CustomUser.objects.get(username=user)
-        category = NoteCategory.objects.get(title=category)
+        category = NoteCategory.objects.get(id=category.id)
         note = Note.objects.create(user=custom_user, category=category,  **validated_data)
         return note
