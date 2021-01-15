@@ -47,6 +47,7 @@ def get_user_stats(request):
     if request.user.is_authenticated:
         user = CustomUser.objects.get(user=request.user)
         stats = {}
+        task_complete = {}
         for day in range(6, -1, -1):
             current_day = date.today() - timedelta(days=day)
             todos = user.todos.filter(
@@ -54,11 +55,16 @@ def get_user_stats(request):
                             created__month=current_day.month,
                             created__day=current_day.day,
                             completed=True)
-            stats[str(current_day)] = len(todos)
+            task_complete[str(current_day)] = len(todos)
+        stats['task_complete'] = task_complete
+        user_category = {}
+        for item in user.categories.all():
+            user_category[item.title] = len(item.note_set.all())
+        stats["user_category"] = user_category
         return JsonResponse(stats)
 
     else:
-        return Response(serializers.data ,status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializers.data, status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view(('GET',))
