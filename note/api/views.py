@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
 
@@ -14,6 +14,10 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from account.models import CustomUser
 from ..models import Note, NoteCategory
 from .serializers import NoteSerializer, NoteCategorySerializer
+
+def apiTest(request):
+    test = {"title": "JSON response from django app"}
+    return JsonResponse(test)
 
 @api_view(["GET"])
 def get_all_notes(request):
