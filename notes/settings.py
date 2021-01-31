@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'note',
     "account",
     'todo',
+    'projects',
     'api_list.apps.ApiListConfig',
 ]
 
